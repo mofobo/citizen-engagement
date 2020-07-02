@@ -5,8 +5,9 @@ import { HttpClient } from '@angular/common/http';
 import {map, tap} from 'rxjs/operators';
 import { User } from '../models/user';
 import { AuthRequest } from '../models/auth-request';
+import { environment } from '../../environments/environment';
 
-const apiUrl = 'https://masrad-2020-ce-mohammed.herokuapp.com/api';
+
 const STORAGE_KEY = 'auth';
 
 @Injectable({
@@ -60,7 +61,7 @@ export class AuthService {
    * Logs in a user with the provided AuthRequest object and emits the received AuthResponse if successful.
    */
   login(authRequest: AuthRequest): Observable<User> {
-    return this.http.post<AuthResponse>(`${apiUrl}/auth`, authRequest).pipe(
+    return this.http.post<AuthResponse>(`${environment.apiUrl}/auth`, authRequest).pipe(
       tap((response) => this.saveAuth(response)),
       map((response) => {
         this.authenticated$.next(response);
