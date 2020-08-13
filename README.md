@@ -23,6 +23,10 @@ Citizen Engagement uses a number of open source projects to work properly:
 * [AngularJS] - HTML enhanced for web apps!
 * [node.js] - evented I/O for the backend
 * [RxJS] - evented I/O for the backend
+## Tools
+Some tools that I used for the development of the application:
+* [dillinger] - dillinger is an online Markdown editor
+* [trello] - trello is a web-based Kanban-style list-making application
 ## Installation
 ## Todos
 License
@@ -35,3 +39,5 @@ MIT
    [node.js]: <http://nodejs.org>
    [AngularJS]: <http://angularjs.org>
    [RxJS]: <https://rxjs-dev.firebaseapp.com>
+   [dillinger]:  <https://dillinger.io/>
+   [trello]:  <https://trello.com/>
