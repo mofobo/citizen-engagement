@@ -9,11 +9,13 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { DummyPageComponent } from './dummy-page/dummy-page.component';
 import {SecurityModule} from './security/security.module';
 import {ApiTokenInterceptorService} from './api/ap-token-interceptor.service';
+import { IssueComponent } from './issue/issue.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DummyPageComponent
+    DummyPageComponent,
+    IssueComponent
   ],
   imports: [
     SecurityModule,
