@@ -1,3 +1,47 @@
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+
+  <mat-card class="box">
+    <mat-card-header>
+      <mat-card-title>Log in</mat-card-title>
+    </mat-card-header>
+
+    <form #loginForm="ngForm" (submit)="onSubmit(loginForm)" class="example-form">
+      <mat-card-content>
+        <mat-form-field class="example-full-width">
+          <input
+            matInput
+            type="text"
+            name="name"
+            id="name"
+            #nameField="ngModel"
+            required
+            [(ngModel)]="authRequest.name"
+            placeholder="Username"
+          />
+          <mat-error>Name is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <input
+            matInput
+            type="password"
+            name="password"
+            id="password"
+            #passwordField="ngModel"
+            required
+            [(ngModel)]="authRequest.password"
+            placeholder="Password"
+          />
+          <mat-error>Password is required</mat-error>
+        </mat-form-field>
+      </mat-card-content>
+      <button mat-stroked-button type="submit" color="accent" class="btn-block">Log in</button>
+    </form>
+  </mat-card>
+
+</div>
+
+<!--
 <form #loginForm="ngForm" (submit)="onSubmit(loginForm)">
   <div>
     <label for="name">Name</label>
@@ -35,3 +79,4 @@
     </p>
   </div>
 </form>
+-->
