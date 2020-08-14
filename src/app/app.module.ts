@@ -1,15 +1,20 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import { DummyPageComponent } from './dummy-page/dummy-page.component';
+import {DummyPageComponent} from './dummy-page/dummy-page.component';
 import {SecurityModule} from './security/security.module';
 import {ApiTokenInterceptorService} from './api/ap-token-interceptor.service';
-import { IssueComponent } from './issue/issue.component';
+import {IssueComponent} from './issue/issue.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatListModule} from '@angular/material/list';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -22,7 +27,13 @@ import { IssueComponent } from './issue/issue.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+
+    MatToolbarModule,
+    MatSidenavModule,
+    MatListModule,
+    MatButtonModule,
+    MatIconModule
   ],
   providers: [
     {
@@ -33,4 +44,5 @@ import { IssueComponent } from './issue/issue.component';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
