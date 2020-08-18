@@ -15,12 +15,14 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
+import { MapComponent } from './map/map.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DummyPageComponent,
-    IssueComponent
+    IssueComponent,
+    MapComponent
   ],
   imports: [
     SecurityModule,
