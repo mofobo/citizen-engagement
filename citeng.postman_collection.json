@@ -1,0 +1,973 @@
+{
+	"info": {
+		"_postman_id": "2815ec99-7cc6-45a6-9b1e-2281e7b5260c",
+		"name": "Citizen Engagement",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/auth",
+			"item": [
+				{
+					"name": "/auth",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "7d0ec205-a4e0-4c76-97c4-56a7b4f3474a",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n \"name\":\"admin\",\n \"password\":\"test\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://masrad-2020-ce-mohammed.herokuapp.com/api/auth",
+							"protocol": "https",
+							"host": [
+								"masrad-2020-ce-mohammed",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "7c370eff-68b8-482a-9289-ccac2c023931",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "964a1c7c-2979-4a4f-a763-625c7e382cf2",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "/data",
+			"item": [
+				{
+					"name": "/data",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/data",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"data"
+							]
+						},
+						"description": "Wipes the database and populates it with random sample data.\n\nThe generated data will contain:\n\n15 users (mix of citizens and staff) with random names and the password test\nAn additional citizen user with the name jdoe and the password test\nAn additional staff user with the name admin and the password test\n3 issue types\n100 issues in the Yverdon area with:\nA random creation date between 3 years ago and now\nA random citizen as the creator\nA random description\nA random issue type\nA random image URL (with 75% probability, otherwise it will be null)\n0-10 random tags (with 75% probability that there will be at least 1 tag)\n0-2 random actions by staff users (with ~90% probability that there will be at least 1 action)\n0-100 comments (with 75% probability that there will be at least 1 comment)"
+					},
+					"response": []
+				},
+				{
+					"name": "/data",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/data",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"data"
+							]
+						},
+						"description": "All data was successfully deleted."
+					},
+					"response": []
+				}
+			],
+			"description": "Sample data management resource",
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "/issues",
+			"item": [
+				{
+					"name": "/issues",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/issues",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"issues"
+							]
+						},
+						"description": "Retrieve a paginated list of issues.\n\nThe list is sorted by descending creation date (from most recent to oldest) by default."
+					},
+					"response": []
+				},
+				{
+					"name": "/issues",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"createdAt\": \"2016-09-09T15:36:41.947Z\",\n  \"description\": \"Dondoen aw rol koseko zez nimjolor ra wimupa kiolono uwi ostiibe irce ve.\",\n  \"imageUrl\": \"http://example.com/image.png\",\n  \"additionalImageUrls\": [\n    \"http://example.com/image-2.png\"\n  ],\n  \"issueTypeHref\": \"/api/issueTypes/58c55a0af2dc592bf95e5d86\",\n  \"location\": {\n    \"coordinates\": [\n      6.6398,\n      46.7678\n    ],\n    \"type\": \"Point\"\n  },\n  \"tags\": [\n    \"rom\",\n    \"re\"\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/issues",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"issues"
+							]
+						},
+						"description": "Create a new issue.\n\nThe authenticated user will be linked to the issue as its creator."
+					},
+					"response": []
+				},
+				{
+					"name": "/issues/{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/issues/{id}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"issues",
+								"{id}"
+							],
+							"query": [
+								{
+									"key": "include",
+									"value": null,
+									"disabled": true
+								}
+							]
+						},
+						"description": "Retrieve the details of an issue."
+					},
+					"response": []
+				},
+				{
+					"name": "/issues/{id}",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"description\": \"Fubar\",\n  \"imageUrl\": \"http://example.com/awesome.png\",\n  \"issueTypeHref\": \"/api/issueTypes/58c55a0af2dc592bf95e5d85\",\n  \"location\": {\n    \"coordinates\": [\n      10.6398,\n      30.7678\n    ],\n    \"type\": \"Point\"\n  },\n  \"tags\": [\n    \"re\",\n    \"foo\"\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/issues/{id}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"issues",
+								"{id}"
+							]
+						},
+						"description": "Update the details of an issue.\n\nOnly the properties in the request body will be updated.\n\nStaff users can update any issue. Citizens can only update the issues they have created.\n\nThe state cannot be updated with this operation. Use the /issues/{id}/actions resource."
+					},
+					"response": []
+				},
+				{
+					"name": "/issues/{id}",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"description\": \"Fubar\",\n  \"imageUrl\": \"http://example.com/awesome.png\",\n  \"issueTypeHref\": \"/api/issueTypes/58c55a0af2dc592bf95e5d85\",\n  \"location\": {\n    \"coordinates\": [\n      10.6398,\n      30.7678\n    ],\n    \"type\": \"Point\"\n  },\n  \"tags\": [\n    \"re\",\n    \"foo\"\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/issues/{id}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"issues",
+								"{id}"
+							]
+						},
+						"description": "Delete an issue."
+					},
+					"response": []
+				}
+			],
+			"description": "Issue management resource",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "dc7f6603-3ca1-422a-b5d0-2587e94ff633",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "f1515b0d-1b6c-4cae-9261-ddfa3fe6e81a",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "/issueTypes",
+			"item": [
+				{
+					"name": "/issueTypes",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "e86a352b-72cb-4728-ac02-e803b695d236",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/issueTypes",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"",
+								"issueTypes"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "pageSize",
+									"value": "5",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Retrieve a paginated list of issue types."
+					},
+					"response": []
+				},
+				{
+					"name": "/issueTypes",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "3dbf3fdd-44ef-4ca4-94fd-f6eed00aee97",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"broken-streetlight\",\n  \"description\": \"Area is poorly lit\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/issueTypes",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"issueTypes"
+							]
+						},
+						"description": "Create a new issue type."
+					},
+					"response": []
+				},
+				{
+					"name": "/issueTypes/{id}",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "5a1dfa85-95bf-480d-923a-d16699a14e64",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/issueTypes/{id}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"issueTypes",
+								"{id}"
+							]
+						},
+						"description": "Retrieve the details of an issue type."
+					},
+					"response": []
+				},
+				{
+					"name": "/issueTypes/{id}",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "8c6dfdf1-3207-42a6-8e16-39f62f910ec7",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"broken-streetlight\",\n  \"description\": \"Can't see\",\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/issueTypes/{id}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"issueTypes",
+								"{id}"
+							]
+						},
+						"description": "Update the details of an issue type.\n\nOnly the properties present in the request body will be updated."
+					},
+					"response": []
+				},
+				{
+					"name": "/issueTypes/{id}",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "6f532995-fc74-473d-978c-17346646ff78",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/issueTypes/{id}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"issueTypes",
+								"{id}"
+							]
+						},
+						"description": "Delete an issue type."
+					},
+					"response": []
+				}
+			],
+			"description": "Issue type management resources",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "0ce7fa8d-1c57-47ad-91bd-665bfacb28b0",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "c6898d32-b81f-433f-bb56-d813c51499a9",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "/me",
+			"item": [
+				{
+					"name": "/me",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "6f4521aa-e30b-46fd-954e-3cc3b2d288be",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/me",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"me"
+							],
+							"query": [
+								{
+									"key": "pageSize",
+									"value": "5",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "\"name\"",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Retrieve the details of the authenticated user."
+					},
+					"response": []
+				},
+				{
+					"name": "/me/issues",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "921e44a1-a68c-40c6-8fac-7ea45eebd969",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/me/issues?page&pageSize&search&state&sort&include",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"me",
+								"issues"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": null,
+									"description": "The page you want to retrieve."
+								},
+								{
+									"key": "pageSize",
+									"value": null,
+									"description": "The number of items you want to retrieve per page."
+								},
+								{
+									"key": "image",
+									"value": "false",
+									"description": "Select only issues with (true) or without (false) images.\nBy default, all issues are returned whether they have an image or not.",
+									"disabled": true
+								},
+								{
+									"key": "search",
+									"value": null,
+									"description": "Select only issues matching the specified text.\nThe search is case-insensitive and includes the issue's description and tags."
+								},
+								{
+									"key": "state",
+									"value": null,
+									"description": "Select only issues in that state.\nCan be used multiple times to find all issues in any of the specified states."
+								},
+								{
+									"key": "sort",
+									"value": null,
+									"description": "Sorting criteria for the collection.\nUse a criterion as is for ascending order, e.g. name, or with a minus character for descending order, e.g. -name.\nThe following criteria are available for this resource: createdAt, updatedAt, state"
+								},
+								{
+									"key": "include",
+									"value": null,
+									"description": "Provide this query parameter one or multiple times to fetch and include linked resources in the response.\n\n(By default, only hyperlink references are provided in the response, e.g. userHref. Use this parameter to also fetch the corresponding resource in the same API call.)\n\nThe following linked resources can be included with this resource: actions, assignee, creator, issueType"
+								}
+							]
+						},
+						"description": "Retrieve a paginated list of the issues created by the authenticated user.\nThe list is sorted by descending creation date (from most recent to oldest) by default."
+					},
+					"response": []
+				}
+			],
+			"description": "Resources linked to the authenticated user",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "9163b45d-566d-47a2-ad13-a3fd595dfa9d",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "1cb10af8-7a59-4c73-9123-26b38fe1bd33",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "/users",
+			"item": [
+				{
+					"name": "/users",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "88bef74a-7cb1-45b4-ac8e-260b3bbfffc1",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/users?page=1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "5",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "\"name\"",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Retrieve a paginated list of users.\nThe list is sorted by name in alphabetical order by default."
+					},
+					"response": []
+				},
+				{
+					"name": "/users",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "5a8ecd00-ad59-46ec-980e-9ae82345dc32",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Momo\",\n  \"password\": \"changeme\",\n  \"firstname\": \"Abdi\",\n  \"lastname\": \"Doe\",\n  \"phone\": \"(460) 614-2120\",\n  \"roles\": [\n    \"citizen\"\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users"
+							]
+						},
+						"description": "Register a new user."
+					},
+					"response": []
+				},
+				{
+					"name": "/user/{id}",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "24e708ee-74a3-457c-bef2-695b79c03b50",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/users/5eeba06db5a23f0016e3c237",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"5eeba06db5a23f0016e3c237"
+							]
+						},
+						"description": "Retrieve the details of a user."
+					},
+					"response": []
+				},
+				{
+					"name": "/user/{id}",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "8d47f8b1-99e8-4729-9469-a371764ecc78",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/users/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								""
+							]
+						},
+						"description": "Update the details of a user.\nOnly the properties present in the request body will be updated.\nA user with the citizen role but not the staff role can only update the details of their own user."
+					},
+					"response": []
+				}
+			],
+			"description": "User management resources",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "c7c353a8-02b3-4515-97ff-6d480bd611d5",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "8621a521-956a-4fbd-970c-da9bcd64cb3e",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "e79c99a3-57e5-444c-ae66-166fc4673cea",
+				"type": "text/javascript",
+				"exec": [
+					"const echoPostRequest = {",
+					"  url: 'https://masrad-2020-ce-mohammed.herokuapp.com/api/auth',",
+					"  method: 'POST',",
+					"  header: 'Content-Type:application/json',",
+					"  body: {",
+					"    mode: 'application/json',",
+					"    raw: JSON.stringify(",
+					"        {",
+					"        \tname:\"admin\",",
+					"        \tpassword:\"test\"",
+					"        })",
+					"  }",
+					"};",
+					"",
+					"",
+					"var nowTimeStamp=Date.now() / 1000 | 0",
+					"",
+					"console.log('timeStamp',time)",
+					"",
+					"var getToken = true;",
+					"",
+					"if (!pm.environment.get('token') || ",
+					"    !pm.environment.get('token_expiration')) {",
+					"    console.log('token or token_expiration is missing')",
+					"} else if (pm.environment.get('token_expiration') <= nowTimeStamp) {",
+					"    console.log('Token is expired')",
+					"} else {",
+					"    getToken = false;",
+					"    console.log('Token is good');",
+					"}",
+					"",
+					"if (getToken === true) {",
+					"    pm.sendRequest(echoPostRequest, function (err, res) {",
+					"    console.log(err ? err : res.json());",
+					"        if (err === null) {",
+					"            console.log('Saving the token and expiry date')",
+					"    ",
+					"            var responseJson = res.json();",
+					"            const payload = responseJson.token.split('.')[1];",
+					"            const parsed = JSON.parse(atob(payload));",
+					"",
+					"            pm.environment.set('token_expiration', parsed.exp);",
+					"            pm.environment.set('token', responseJson.token)",
+					"        }",
+					"    });",
+					"}",
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "0ee5ccdc-85cb-4067-94d4-8aa73659a362",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
