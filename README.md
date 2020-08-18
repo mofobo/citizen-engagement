@@ -28,6 +28,9 @@ Some tools that I used for the development of the application:
 * [dillinger] - dillinger is an online Markdown editor
 * [trello] - trello is a web-based Kanban-style list-making application
 ## Installation
+## Miscellaneous
+* [Citizen Engagement API documentation]
+* username: 'mohammed', password: '1234' (without quote)
 ## Todos
 License
 ----
@@ -41,3 +44,4 @@ MIT
    [RxJS]: <https://rxjs-dev.firebaseapp.com>
    [dillinger]:  <https://dillinger.io/>
    [trello]:  <https://trello.com/>
+   [Citizen Engagement API documentation]:  <https://mediacomem.github.io/comem-citizen-engagement-api/>
