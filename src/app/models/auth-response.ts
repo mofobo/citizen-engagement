@@ -1,6 +1,6 @@
-import { User } from './user';
+import {UserModel} from '../core/domain/user.model';
 
 export class AuthResponse {
   token: string;
-  user: User;
+  user: UserModel;
 }

@@ -3,9 +3,11 @@ import { Observable, ReplaySubject } from 'rxjs';
 import { AuthResponse } from '../models/auth-response';
 import { HttpClient } from '@angular/common/http';
 import {map, tap} from 'rxjs/operators';
-import { User } from '../models/user';
+
 import { AuthRequest } from '../models/auth-request';
 import { environment } from '../../environments/environment';
+import {User} from '../models/user';
+import {UserModel} from '../core/domain/user.model';
 
 
 const STORAGE_KEY = 'auth';
@@ -42,7 +44,7 @@ export class AuthService {
   /**
    * Retrieves the User object from the latest AuthResponse value
    */
-  getUser(): Observable<User> {
+  getUser(): Observable<UserModel> {
     return this.authenticated$.pipe(
       map((auth) => (auth ? auth.user : undefined))
     );
