@@ -6,26 +6,27 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import {DummyPageComponent} from './dummy-page/dummy-page.component';
-import {SecurityModule} from './security/security.module';
-import {ApiTokenInterceptorService} from './api/ap-token-interceptor.service';
-import {IssueComponent} from './issue/issue.component';
+import {ApiTokenInterceptorService} from './core/base/ap-token-interceptor.service';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
-import { MapComponent } from './map/map.component';
+import {MapComponent} from './map/map.component';
+import {DataModule} from './data/data.module';
+import {CoreModule} from './core/core.module';
+import {PresentationModule} from './presentation/presentation.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DummyPageComponent,
-    IssueComponent,
-    MapComponent
+    MapComponent,
   ],
   imports: [
-    SecurityModule,
+    CoreModule,
+    DataModule,
+    PresentationModule,
+
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {AuthService} from './security/auth.service';
 import {Router} from '@angular/router';
+import {LogoutUsecase} from './core/usecases/logout.usecase';
 
 @Component({
   selector: 'app-root',
@@ -10,11 +10,11 @@ import {Router} from '@angular/router';
 export class AppComponent {
   title = 'Citizen Engagement';
 
-  constructor(private auth: AuthService, private router: Router) {
+  constructor(private logoutUsecase: LogoutUsecase, private router: Router) {
   }
 
   logout(): void {
-    this.auth.logout();
+    this.logoutUsecase.execute().subscribe();
     this.router.navigateByUrl('/login');
   }
 }

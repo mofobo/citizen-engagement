@@ -1,4 +1,5 @@
 import {GeoJSON} from 'leaflet';
+import {UserModel} from './user.model';
 
 export type IssueState = 'new' | 'inProgress' | 'rejected' | 'resolved';
 
@@ -9,6 +10,8 @@ export interface IssueModel {
   readonly createdAt: Date;
   // A hyperlink reference to the user who reported the issue
   readonly creatorHref: string;
+  // The user who reported the issue
+  creator: UserModel;
   // An optional description of the issue
   description?: string;
   // A hyperlink reference to the issue

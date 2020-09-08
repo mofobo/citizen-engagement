@@ -15,7 +15,7 @@ To better get what is expected, just [watch this video](https://www.youtube.com/
 ### Bonus - Staff member features:
 - log in to the app, update issues' status, and close or reject them
 - see comments on issues and post new comments
-- add, edit and remove issue types from the app
+- add, edit and remove issue types.ts from the app
 ## Backlog
 You can find the product backlog here [product backlog here](https://trello.com/b/6NTQyCYT/citizen-engagement).
 ## Tech
