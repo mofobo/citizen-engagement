@@ -15,7 +15,7 @@ To better get what is expected, just [watch this video](https://www.youtube.com/
 ### Bonus - Staff member features:
 - log in to the app, update issues' status, and close or reject them
 - see comments on issues and post new comments
-- add, edit and remove issue types from the app
+- add, edit and remove issue types.ts from the app
 ## Backlog
 You can find the product backlog here [product backlog here](https://trello.com/b/6NTQyCYT/citizen-engagement).
 ## Tech
@@ -23,7 +23,14 @@ Citizen Engagement uses a number of open source projects to work properly:
 * [AngularJS] - HTML enhanced for web apps!
 * [node.js] - evented I/O for the backend
 * [RxJS] - evented I/O for the backend
+## Tools
+Some tools that I used for the development of the application:
+* [dillinger] - dillinger is an online Markdown editor
+* [trello] - trello is a web-based Kanban-style list-making application
 ## Installation
+## Miscellaneous
+* [Citizen Engagement API documentation]
+* username: 'mohammed', password: '1234' (without quote)
 ## Todos
 License
 ----
@@ -35,3 +42,6 @@ MIT
    [node.js]: <http://nodejs.org>
    [AngularJS]: <http://angularjs.org>
    [RxJS]: <https://rxjs-dev.firebaseapp.com>
+   [dillinger]:  <https://dillinger.io/>
+   [trello]:  <https://trello.com/>
+   [Citizen Engagement API documentation]:  <https://mediacomem.github.io/comem-citizen-engagement-api/>
