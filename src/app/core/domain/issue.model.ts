@@ -6,6 +6,8 @@ export type IssueState = 'new' | 'inProgress' | 'rejected' | 'resolved';
 export interface IssueModel {
   // 	A hyperlink reference to the staff user assigned to the issue (null for newly created issues)
   readonly assigneeHref: string;
+  // The user assigned to the issue
+  assignee: UserModel;
   // The date at which the issue was created
   readonly createdAt: Date;
   // A hyperlink reference to the user who reported the issue

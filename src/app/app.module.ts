@@ -16,6 +16,10 @@ import {MapComponent} from './map/map.component';
 import {DataModule} from './data/data.module';
 import {CoreModule} from './core/core.module';
 import {PresentationModule} from './presentation/presentation.module';
+import {CdkTableModule} from '@angular/cdk/table';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -32,11 +36,15 @@ import {PresentationModule} from './presentation/presentation.module';
     BrowserAnimationsModule,
     HttpClientModule,
 
+    CdkTableModule,
+    MatTableModule,
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   providers: [
     {

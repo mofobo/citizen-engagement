@@ -10,18 +10,29 @@ import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {CdkTableModule} from '@angular/cdk/table';
+import {MatSort, MatSortModule} from '@angular/material/sort';
+import {BrowserModule} from '@angular/platform-browser';
 
 @NgModule({
   imports: [
     CommonModule,
     CoreModule,
     DataModule,
-    MatTableModule,
+    BrowserModule,
     FormsModule,
+    CdkTableModule,
+    MatTableModule,
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatProgressSpinnerModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatTableModule
   ],
   declarations: [
     IssueListComponent,
@@ -29,7 +40,7 @@ import {MatButtonModule} from '@angular/material/button';
   ],
   exports: [
     IssueListComponent,
-    LoginComponent
+    LoginComponent,
   ],
   providers: []
 })
