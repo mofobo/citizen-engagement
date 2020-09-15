@@ -15,6 +15,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {CdkTableModule} from '@angular/cdk/table';
 import {MatSort, MatSortModule} from '@angular/material/sort';
 import {BrowserModule} from '@angular/platform-browser';
+import { CreateIssueComponent } from './create-issue/create-issue.component';
+import {MatStepperModule} from "@angular/material/stepper";
 
 @NgModule({
   imports: [
@@ -32,15 +34,17 @@ import {BrowserModule} from '@angular/platform-browser';
     MatProgressSpinnerModule,
     MatPaginatorModule,
     MatSortModule,
-    MatTableModule
+    MatTableModule,
+    MatStepperModule
   ],
   declarations: [
     IssueListComponent,
-    LoginComponent
+    LoginComponent,
+    CreateIssueComponent
   ],
   exports: [
     IssueListComponent,
-    LoginComponent,
+    LoginComponent
   ],
   providers: []
 })
