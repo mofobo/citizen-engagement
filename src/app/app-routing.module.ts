@@ -1,9 +1,10 @@
 import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 import {AuthGuard} from './core/security/guards/auth.guard';
 import {LoginComponent} from './presentation/login/login.component';
 import {IssueListComponent} from './presentation/issue-list/issue-list.component';
 import {CreateIssueComponent} from './presentation/create-issue/create-issue.component';
+
 
 const routes: Routes = [
   // Add this default route to redirect to issues

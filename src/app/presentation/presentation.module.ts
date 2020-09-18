@@ -5,7 +5,7 @@ import {DataModule} from '../data/data.module';
 import {IssueListComponent} from './issue-list/issue-list.component';
 import {MatTableModule} from '@angular/material/table';
 import {LoginComponent} from './login/login.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
@@ -13,10 +13,12 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {CdkTableModule} from '@angular/cdk/table';
-import {MatSort, MatSortModule} from '@angular/material/sort';
+import {MatSortModule} from '@angular/material/sort';
 import {BrowserModule} from '@angular/platform-browser';
-import { CreateIssueComponent } from './create-issue/create-issue.component';
-import {MatStepperModule} from "@angular/material/stepper";
+import {CreateIssueComponent} from './create-issue/create-issue.component';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MapComponent} from './map/map.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   imports: [
@@ -35,12 +37,16 @@ import {MatStepperModule} from "@angular/material/stepper";
     MatPaginatorModule,
     MatSortModule,
     MatTableModule,
-    MatStepperModule
+    MatStepperModule,
+    ReactiveFormsModule,
+    BrowserModule,
+    BrowserAnimationsModule,
   ],
   declarations: [
     IssueListComponent,
     LoginComponent,
-    CreateIssueComponent
+    CreateIssueComponent,
+    MapComponent,
   ],
   exports: [
     IssueListComponent,
