@@ -1,17 +1,21 @@
-<button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
-  {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
-</button>
-<mat-horizontal-stepper [linear]="isLinear" #stepper>
+<h1>Create Issue</h1>
+<mat-horizontal-stepper [linear]="true" #stepper>
   <mat-step [stepControl]="firstFormGroup">
-    <form [formGroup]="firstFormGroup">
-      <ng-template matStepLabel>Fill out your name</ng-template>
-
-      <div class="map-wrapper">
-        <div class="map-border">
-          <div id="map"></div>
-        </div>
+    <div class="map-wrapper">
+      <div class="map-border">
+        <div id="map"></div>
       </div>
-
+    </div>
+    <ng-template matStepLabel>Select location</ng-template>
+    <form [formGroup]="firstFormGroup">
+      <mat-form-field>
+        <mat-label>Latitude</mat-label>
+        <input matInput formControlName="latitudeCtrl" required readonly>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Longitude</mat-label>
+        <input matInput formControlName="longitudeCtrl" required readonly>
+      </mat-form-field>
       <div>
         <button mat-button matStepperNext>Next</button>
       </div>

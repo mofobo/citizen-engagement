@@ -59,7 +59,8 @@ export class CreateIssueComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.firstFormGroup = this.formBuilder.group({
-      firstCtrl: ['', Validators.required]
+      latitudeCtrl: ['', Validators.required],
+      longitudeCtrl: ['', Validators.required]
     });
     this.secondFormGroup = this.formBuilder.group({
       secondCtrl: ['', Validators.required]
@@ -83,6 +84,10 @@ export class CreateIssueComponent implements OnInit, AfterViewInit {
     this.map.on('click', e => {
       console.log(e.latlng); // get the coordinates
       this.replaceMarker(e.latlng.lat, e.latlng.lng);
+
+      this.firstFormGroup.get('latitudeCtrl').setValue(e.latlng.lat);
+      this.firstFormGroup.get('longitudeCtrl').setValue(e.latlng.lng);
+
       this.flyToLocation(e.latlng.lat, e.latlng.lng);
     });
   }

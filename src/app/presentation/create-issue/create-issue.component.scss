@@ -9,7 +9,7 @@
 
 .map-border {
   border: 2px solid orange;
-  height: 700px;
+  height: 650px;
   width: 100%;
   float: left;
 }
@@ -17,4 +17,12 @@
 #map {
   height: 100%;
   width: 100%;
+}
+
+h1 {
+  margin: 20px;
+}
+
+mat-form-field {
+  margin: 20px;
 }
