@@ -47,7 +47,6 @@ export class IssueWebRepository extends IssueRepository {
             nextPage: Link['next'],
             lastPage: Link['last']
           } as GetIssuesResponseModel;
-          console.log('GetIssuesResponseModel', dsd);
           return dsd;
         }
       ));

@@ -16,6 +16,19 @@ export class CreateIssueComponent implements OnInit, AfterViewInit {
   secondFormGroup: FormGroup;
 
   map;
+  marker = {};
+
+
+  markerIcon = {
+    icon: L.icon({
+      iconSize: [25, 41],
+      iconAnchor: [10, 41],
+      popupAnchor: [2, -40],
+      // specify the path here
+      iconUrl: 'https://unpkg.com/leaflet@1.5.1/dist/images/marker-icon.png',
+      shadowUrl: 'https://unpkg.com/leaflet@1.5.1/dist/images/marker-shadow.png'
+    })
+  };
 
   smallIcon = new L.Icon({
     iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-icon.png',
@@ -28,6 +41,13 @@ export class CreateIssueComponent implements OnInit, AfterViewInit {
   });
 
   formGroup: FormGroup;
+
+  bernZytglogge = {
+    lat: 46.947988,
+    lng: 7.447792
+  };
+
+  maxZoom = 19;
 
   constructor(private formBuilder: FormBuilder) {
   }
@@ -46,57 +66,46 @@ export class CreateIssueComponent implements OnInit, AfterViewInit {
     });
   }
 
-
   ngAfterViewInit() {
     this.createMap();
-    this.requestCurrentLocationIfAvailable();
+    this.getBrowserLocation();
   }
 
   createMap() {
-    const parcThabor = {
-      lat: 46.947988,
-      lng: 7.447792
-    };
-
-    const zoomLevel = 17;
-    this.map = L.map('map', {
-      center: [parcThabor.lat, parcThabor.lng],
-      zoom: zoomLevel
-    });
-    
+    this.map = L.map('map').fitWorld();
     const mainLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       minZoom: 1,
-      maxZoom: 19,
+      maxZoom: this.maxZoom,
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     });
-
     mainLayer.addTo(this.map);
-    this.addMarker(parcThabor);
+
+    this.map.on('click', e => {
+      console.log(e.latlng); // get the coordinates
+      this.replaceMarker(e.latlng.lat, e.latlng.lng);
+      this.flyToLocation(e.latlng.lat, e.latlng.lng);
+    });
   }
 
-  addMarker(coords) {
-    const marker = L.marker([coords.lat, coords.lng], {icon: this.smallIcon});
-    marker.addTo(this.map);
-  }
-
-  flyToPosition = function (position) {
-    const self = this;
-    const myCurrentLocation = {
-      lat: position.coords.latitude,
-      lng: position.coords.longitude
-    };
-    self.map.flyTo([position.coords.latitude, position.coords.longitude], 8);
-  };
-
-  private requestCurrentLocationIfAvailable() {
-    if ('geolocation' in navigator) {
-      const self = this;
-      navigator.geolocation.getCurrentPosition(this.flyToPosition);
-      console.log('HOHOHO');
+  getBrowserLocation(): void {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.flyToLocation(position.coords.latitude, position.coords.longitude);
+      });
     } else {
-      console.log('FUUCK');
-      /* la géolocalisation n'est pas disponible */
+      console.error('No support for geolocation');
+      this.flyToLocation(this.bernZytglogge.lat, this.bernZytglogge.lng);
     }
   }
 
+  flyToLocation(latitude: number, longitude: number) {
+    this.map.flyTo([latitude, longitude], 19);
+  }
+
+  private replaceMarker(latitude: number, longitude: number) {
+    if (this.marker !== undefined) {
+      this.map.removeLayer(this.marker);
+    }
+    this.marker = L.marker([latitude, longitude], this.markerIcon).addTo(this.map);
+  }
 }
