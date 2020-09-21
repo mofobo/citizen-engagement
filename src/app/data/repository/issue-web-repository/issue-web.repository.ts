@@ -5,7 +5,7 @@ import {IssueModel} from '../../../core/domain/issue.model';
 import {Observable} from 'rxjs';
 import {environment} from '../../../../environments/environment';
 import {CreateIssueRequestModel} from '../../../core/domain/create-issue-request.model';
-import {GetIssuesRequestModel, IssueImageParam} from '../../../core/domain/get-issues-request.model';
+import {GetIssuesRequestModel} from '../../../core/domain/get-issues-request.model';
 import {map} from 'rxjs/operators';
 import {GetIssuesResponseModel} from '../../../core/domain/get-issues-response.model';
 
@@ -37,23 +37,33 @@ export class IssueWebRepository extends IssueRepository {
 
     return this.http.get<IssueModel[]>(url, {params: httpParams, observe: 'response'}).pipe(
       map((response) => {
+          // Retrieve header
+          const Link = this.parseLinkHeader(response.headers.get('Link'));
 
-          const Link = this.parse_link_header(response.headers.get('Link'));
-
-
-          const dsd = {
+          const getIssuesResponseModel = {
             issues: response.body,
             paginationTotal: Number(response.headers.get('Pagination-Total')),
             nextPage: Link['next'],
             lastPage: Link['last']
           } as GetIssuesResponseModel;
-          return dsd;
+          return getIssuesResponseModel;
         }
       ));
   }
 
+  getIssue(id: string): Observable<IssueModel> {
+    const url = `${environment.apiUrl}/issues/${id}`;
+    return this.http
+      .get<IssueModel>(url);
+  }
 
-  parse_link_header(header) {
+  createIssue(createIssueRequest: CreateIssueRequestModel): Observable<IssueModel> {
+    const url = `${environment.apiUrl}/issues`;
+    return this.http
+      .post<any>(url, createIssueRequest);
+  }
+
+  private parseLinkHeader(header) {
     if (header.length === 0) {
       return;
     }
@@ -68,18 +78,5 @@ export class IssueWebRepository extends IssueRepository {
 
     });
     return links;
-  }
-
-
-  getIssue(id: string): Observable<IssueModel> {
-    const url = `${environment.apiUrl}/issues/${id}`;
-    return this.http
-      .get<IssueModel>(url);
-  }
-
-  createIssue(createIssueRequest: CreateIssueRequestModel): Observable<IssueModel> {
-    const url = `${environment.apiUrl}/issues`;
-    return this.http
-      .post<any>(url, createIssueRequest);
   }
 }

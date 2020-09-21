@@ -5,7 +5,7 @@ import {IssueTypeModel} from '../domain/issue-type.model';
 import {CreateIssueTypeRequestModel} from '../domain/create-issue-type-request.model';
 
 export abstract class IssueTypeRepository {
-  abstract getIssueTypes(): Observable<IssueTypeModel>;
+  abstract getIssueTypes(): Observable<IssueTypeModel[]>;
   abstract createIssueType(createIssueTypeRequest: CreateIssueTypeRequestModel): Observable<IssueTypeModel>;
   abstract getIssue(id: string): Observable<IssueTypeModel>;
   abstract updateIssue(issueType: IssueTypeModel): Observable<IssueTypeModel>;

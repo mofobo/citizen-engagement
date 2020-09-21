@@ -1,6 +1,15 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import * as L from 'leaflet';
+import {GetUsersUsecase} from '../../core/usecases/get-users.usecase';
+import {GetUsersRequestModel} from '../../core/domain/get-users-request.model';
+import {UserModel} from '../../core/domain/user.model';
+import {GetIssueTypesUsecase} from '../../core/usecases/get-issue-types.usecase';
+import {IssueTypeModel} from '../../core/domain/issue-type.model';
+import {CreateIssueUsecase} from '../../core/usecases/create-issue.usecase';
+import {CreateIssueRequestModel} from '../../core/domain/create-issue-request.model';
+import {GeoJson} from '../../core/domain/GeoJson';
+import {Router} from '@angular/router';
 
 /**
  * @title Stepper overview
@@ -11,45 +20,39 @@ import * as L from 'leaflet';
   styleUrls: ['./create-issue.component.scss']
 })
 export class CreateIssueComponent implements OnInit, AfterViewInit {
-  isLinear = false;
+
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
-
+  thirdFormGroup: FormGroup;
   map;
   marker = {};
-
 
   markerIcon = {
     icon: L.icon({
       iconSize: [25, 41],
       iconAnchor: [10, 41],
       popupAnchor: [2, -40],
-      // specify the path here
       iconUrl: 'https://unpkg.com/leaflet@1.5.1/dist/images/marker-icon.png',
       shadowUrl: 'https://unpkg.com/leaflet@1.5.1/dist/images/marker-shadow.png'
     })
   };
 
-  smallIcon = new L.Icon({
-    iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-icon.png',
-    iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-icon-2x.png',
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-    shadowSize: [41, 41]
-  });
-
   formGroup: FormGroup;
-
   bernZytglogge = {
     lat: 46.947988,
     lng: 7.447792
   };
-
   maxZoom = 19;
 
-  constructor(private formBuilder: FormBuilder) {
+  users: UserModel[] = [];
+  issueTypes: IssueTypeModel[] = [];
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private getUsersUseCase: GetUsersUsecase,
+    private getIssueTypeUseCase: GetIssueTypesUsecase,
+    private createIssue: CreateIssueUsecase,
+    private router: Router) {
   }
 
   /** Returns a FormArray with the name 'formArray'. */
@@ -63,13 +66,19 @@ export class CreateIssueComponent implements OnInit, AfterViewInit {
       longitudeCtrl: ['', Validators.required]
     });
     this.secondFormGroup = this.formBuilder.group({
-      secondCtrl: ['', Validators.required]
+      descriptionCtrl: ['', Validators.required],
+      issueTypeCtrl: ['', Validators.required]
+    });
+    this.thirdFormGroup = this.formBuilder.group({
+      assigneeCtrl: ['', Validators.required]
     });
   }
 
   ngAfterViewInit() {
     this.createMap();
     this.getBrowserLocation();
+    this.loadusers();
+    this.loadIssueTypes();
   }
 
   createMap() {
@@ -95,16 +104,44 @@ export class CreateIssueComponent implements OnInit, AfterViewInit {
   getBrowserLocation(): void {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
-        this.flyToLocation(position.coords.latitude, position.coords.longitude);
+        if (this.marker === undefined) {
+          this.flyToLocation(position.coords.latitude, position.coords.longitude);
+        }
       });
     } else {
       console.error('No support for geolocation');
-      this.flyToLocation(this.bernZytglogge.lat, this.bernZytglogge.lng);
+      if (this.marker === undefined) {
+        this.flyToLocation(this.bernZytglogge.lat, this.bernZytglogge.lng);
+      }
     }
   }
 
   flyToLocation(latitude: number, longitude: number) {
     this.map.flyTo([latitude, longitude], 19);
+  }
+
+  public create() {
+
+    this.firstFormGroup.get('latitudeCtrl');
+
+    const location: GeoJson = {
+      type: 'Point',
+      coordinates: [Number(this.firstFormGroup.get('longitudeCtrl').value), Number(this.firstFormGroup.get('latitudeCtrl').value)]
+    };
+
+    const createIssueRequest: CreateIssueRequestModel = {
+      description: String(this.secondFormGroup.get('descriptionCtrl').value),
+      issueTypeHref: this.secondFormGroup.get('issueTypeCtrl').value.href,
+      assignee: this.thirdFormGroup.get('assigneeCtrl').value,
+      location,
+      tags: ['lol', 'dep']
+    };
+
+    console.log('CREATE', createIssueRequest);
+    this.createIssue.execute(createIssueRequest).subscribe(value => {
+      console.log('CREATED', value);
+      this.router.navigateByUrl('/issues');
+    });
   }
 
   private replaceMarker(latitude: number, longitude: number) {
@@ -113,4 +150,23 @@ export class CreateIssueComponent implements OnInit, AfterViewInit {
     }
     this.marker = L.marker([latitude, longitude], this.markerIcon).addTo(this.map);
   }
+
+  private loadusers() {
+    const getUsersRequest: GetUsersRequestModel = {
+      page: 1,
+      pageSize: 50,
+      sort: ['name']
+    };
+    this.getUsersUseCase.execute(getUsersRequest).subscribe(value => {
+      this.users = value.users;
+      console.log('USERS', this.users);
+    });
+  }
+
+  private loadIssueTypes() {
+    this.getIssueTypeUseCase.execute().subscribe(value => {
+      this.issueTypes = value;
+    });
+  }
+
 }

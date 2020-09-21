@@ -19,29 +19,31 @@ import {CreateIssueComponent} from './create-issue/create-issue.component';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MapComponent} from './map/map.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatSelectModule} from "@angular/material/select";
 
 @NgModule({
-  imports: [
-    CommonModule,
-    CoreModule,
-    DataModule,
-    BrowserModule,
-    FormsModule,
-    CdkTableModule,
-    MatTableModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatProgressSpinnerModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatTableModule,
-    MatStepperModule,
-    ReactiveFormsModule,
-    BrowserModule,
-    BrowserAnimationsModule,
-  ],
+    imports: [
+        CommonModule,
+        CoreModule,
+        DataModule,
+        BrowserModule,
+        FormsModule,
+        CdkTableModule,
+        MatTableModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        MatProgressSpinnerModule,
+        MatPaginatorModule,
+        MatSortModule,
+        MatTableModule,
+        MatStepperModule,
+        ReactiveFormsModule,
+        BrowserModule,
+        BrowserAnimationsModule,
+        MatSelectModule,
+    ],
   declarations: [
     IssueListComponent,
     LoginComponent,

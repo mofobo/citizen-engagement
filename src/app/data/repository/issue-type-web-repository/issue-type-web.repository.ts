@@ -32,7 +32,7 @@ export class IssueTypeWebRepository extends IssueTypeRepository {
     return this.http.get<any>(url);
   }
 
-  getIssueTypes(): Observable<IssueTypeModel> {
+  getIssueTypes(): Observable<IssueTypeModel[]> {
     const url = `${environment.apiUrl}/issueTypes`;
     return this.http.get<any>(url);
   }

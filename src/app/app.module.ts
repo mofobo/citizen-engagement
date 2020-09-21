@@ -52,7 +52,6 @@ import {MatSortModule} from '@angular/material/sort';
       multi: true,
     },
   ],
-  exports: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {
