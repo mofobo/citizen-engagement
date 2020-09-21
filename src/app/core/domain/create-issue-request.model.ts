@@ -1,11 +1,13 @@
-import {GeoJSON} from 'leaflet';
+import {GeoJson} from './GeoJson';
+import {UserModel} from "./user.model";
 
 export interface CreateIssueRequestModel {
-  createdAt: Date;
+  createdAt?: Date;
   description?: string;
   imageUrl?: string;
   additionalImageUrls?: string[];
   issueTypeHref: string;
-  location: GeoJSON;
+  assignee: UserModel;
+  location: GeoJson;
   tags: string[];
 }

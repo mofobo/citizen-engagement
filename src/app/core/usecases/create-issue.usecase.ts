@@ -8,7 +8,7 @@ import {CreateIssueRequestModel} from '../domain/create-issue-request.model';
 @Injectable({
   providedIn: 'root'
 })
-export class GetIssueUsecase implements UseCase<CreateIssueRequestModel, IssueModel> {
+export class CreateIssueUsecase implements UseCase<CreateIssueRequestModel, IssueModel> {
 
   constructor(private issueRepository: IssueRepository) {
   }

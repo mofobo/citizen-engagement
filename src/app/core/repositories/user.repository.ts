@@ -1,9 +1,8 @@
 import {Observable} from 'rxjs';
-import {UserModel} from '../domain/user.model';
-
-export type UserSortType = 'name' | 'firstname' | 'lastname' | 'phone';
+import {GetUsersRequestModel} from '../domain/get-users-request.model';
+import {GetUsersResponseModel} from '../domain/get-users-response.model';
 
 export abstract class UserRepository {
-  abstract getUsers(page: number, pageSize: number, sort: UserSortType): Observable<UserModel[]>;
+  abstract getUsers(getUsersRequestModel: GetUsersRequestModel): Observable<GetUsersResponseModel>;
 
 }

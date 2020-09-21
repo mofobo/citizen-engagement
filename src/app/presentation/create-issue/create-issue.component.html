@@ -1,0 +1,73 @@
+<h1>Create Issue</h1>
+<mat-horizontal-stepper [linear]="true" #stepper>
+
+  <!-- LOCATION -->
+  <mat-step [stepControl]="firstFormGroup" label="Select location">
+    <div class="map-wrapper">
+      <div class="map-border">
+        <div id="map"></div>
+      </div>
+    </div>
+    <form [formGroup]="firstFormGroup">
+      <mat-form-field>
+        <mat-label>Latitude</mat-label>
+        <input matInput formControlName="latitudeCtrl" required readonly>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Longitude</mat-label>
+        <input matInput formControlName="longitudeCtrl" required readonly>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <!-- DESCRIPTION -->
+  <mat-step [stepControl]="secondFormGroup" label="Add description">
+    <form [formGroup]="secondFormGroup">
+      <mat-form-field class="example-full-width">
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="descriptionCtrl"></textarea>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Issue type</mat-label>
+        <mat-select formControlName="issueTypeCtrl" required>
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let issueType of issueTypes" [value]="issueType">
+            {{issueType.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <!-- DONE -->
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <form [formGroup]="thirdFormGroup">
+      <mat-form-field appearance="fill">
+        <mat-label>Assignee</mat-label>
+        <mat-select formControlName="assigneeCtrl" required>
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let user of users" [value]="user">
+            {{user.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+
+    <p>You are now done.</p>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()" type="reset">Reset</button>
+      <button mat-button (click)="create()" type="submit"
+              [disabled]="firstFormGroup.invalid && secondFormGroup.invalid && thirdFormGroup.invalid">Create
+      </button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>

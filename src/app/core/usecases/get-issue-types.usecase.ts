@@ -7,12 +7,12 @@ import {IssueTypeModel} from '../domain/issue-type.model';
 @Injectable({
   providedIn: 'root'
 })
-export class GetIssueTypesUsecase implements UseCase<void, IssueTypeModel> {
+export class GetIssueTypesUsecase implements UseCase<void, IssueTypeModel[]> {
 
   constructor(private issueTypeRepository: IssueTypeRepository) {
   }
 
-  execute(params: void): Observable<IssueTypeModel> {
+  execute(params: void): Observable<IssueTypeModel[]> {
     return this.issueTypeRepository.getIssueTypes();
   }
 }

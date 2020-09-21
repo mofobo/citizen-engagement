@@ -1,11 +1,13 @@
-import {GeoJSON} from 'leaflet';
 import {UserModel} from './user.model';
+import {GeoJson} from './GeoJson';
 
 export type IssueState = 'new' | 'inProgress' | 'rejected' | 'resolved';
 
 export interface IssueModel {
   // 	A hyperlink reference to the staff user assigned to the issue (null for newly created issues)
   readonly assigneeHref: string;
+  // The user assigned to the issue
+  assignee: UserModel;
   // The date at which the issue was created
   readonly createdAt: Date;
   // A hyperlink reference to the user who reported the issue
@@ -25,7 +27,7 @@ export interface IssueModel {
   // A hyperlink reference to an issue type (the ID alone is also a valid reference)
   issueTypeHref: string;
   // A GeoJSON point indicating the geographical coordinates of the issue
-  location: GeoJSON;
+  location: GeoJson;
   // The current state of the issue (new, inProgress, rejected or resolved)
   readonly state: IssueState;
   // An optional array of tag strings describing the issue
