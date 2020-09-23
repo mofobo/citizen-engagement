@@ -7,7 +7,6 @@ import {IssueModel} from '../../core/domain/issue.model';
 import {GetApiInformationUsecase} from '../../core/usecases/get-api-information.usecase';
 import * as L from 'leaflet';
 import {GetIssuesResponseModel} from '../../core/domain/get-issues-response.model';
-import {IssueTypeModel} from '../../core/domain/issue-type.model';
 
 @Component({
   selector: 'app-issues-map',
@@ -72,7 +71,7 @@ export class IssuesMapComponent implements OnInit {
             search: '',
             state: [],
             sort: [],
-            include: ['creator', 'assignee']
+            include: ['creator', 'issueType']
           };
           sources.push(this.getIssuesUsecase.execute(req));
         }
@@ -80,10 +79,8 @@ export class IssuesMapComponent implements OnInit {
           .subscribe(results => {
             const issues: IssueModel[] = [];
             for (const resp of results) {
-              console.log('FUCK', (resp as GetIssuesResponseModel).issues);
               issues.push.apply(issues, (resp as GetIssuesResponseModel).issues);
             }
-            console.log('FUUUUUUUCK', issues);
             this.issuesSubject.next(issues);
           });
       }
@@ -98,17 +95,17 @@ export class IssuesMapComponent implements OnInit {
     this.router.navigate(['issues', id]);
   }
 
-  private addMarker(latitude: number, longitude: number, issueId: string, issueType: IssueTypeModel) {
-    const marker = L.marker([latitude, longitude], this.markerIcon);
+  private addMarker(issue: IssueModel) {
+    const marker = L.marker([issue.location.coordinates[1], issue.location.coordinates[0]], this.markerIcon);
     this.markers.push(marker);
-    const txt = '<a mat-button class="details" [routerLink]="\'create-issue\'"> details </a>';
+    const txt = `<a>${issue.creator.name}</a><br>` + `<a>${issue.issueType.name}</a><br>` + '<a mat-button style="text-decoration: underline" class="details" [routerLink]="\'create-issue\' "> details </a>';
     marker.bindPopup(txt);
     marker.on('popupopen', (a) => {
       const popUp = a.target.getPopup();
       popUp.getElement()
         .querySelector('.details')
         .addEventListener('click', e => {
-          this.navigateToDetails(issueId);
+          this.navigateToDetails(issue.id);
         });
     });
     marker.addTo(this.map);
@@ -118,7 +115,7 @@ export class IssuesMapComponent implements OnInit {
     this.issuesSubject.subscribe(value => {
       if (value.length > 0) {
         for (const issue of value) {
-          this.addMarker(issue.location.coordinates[1], issue.location.coordinates[0], issue.id, issue.issueType);
+          this.addMarker(issue);
         }
         const group = L.featureGroup(this.markers);
         this.map.flyToBounds(group.getBounds().pad(0.5));
