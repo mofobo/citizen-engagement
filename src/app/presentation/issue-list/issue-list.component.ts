@@ -5,9 +5,8 @@ import {IssuesDataSource} from './issues-data-source';
 import {GetIssuesRequestModel, IssueSortParam} from '../../core/domain/get-issues-request.model';
 import {MatPaginator} from '@angular/material/paginator';
 import {tap} from 'rxjs/operators';
-import {ActivatedRoute} from '@angular/router';
+import {Router} from '@angular/router';
 import {merge} from 'rxjs';
-import {IssueModel} from '../../core/domain/issue.model';
 
 @Component({
   selector: 'app-issue-list',
@@ -33,7 +32,7 @@ export class IssueListComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private getIssuesUsecase: GetIssuesUsecase, private route: ActivatedRoute) {
+  constructor(private getIssuesUsecase: GetIssuesUsecase, private router: Router) {
   }
 
   ngOnInit() {
@@ -75,7 +74,7 @@ export class IssueListComponent implements OnInit, AfterViewInit {
     return [];
   }
 
-  onRowClicked(row: any) {
-    console.log('Row clicked->navigate to route /issues/id: ', row);
+  onRowClicked(id: string) {
+    this.router.navigate(['issues', id]);
   }
 }

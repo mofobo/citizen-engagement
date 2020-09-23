@@ -1,5 +1,6 @@
 import {UserModel} from './user.model';
 import {GeoJson} from './GeoJson';
+import {IssueTypeModel} from "./issue-type.model";
 
 export type IssueState = 'new' | 'inProgress' | 'rejected' | 'resolved';
 
@@ -26,6 +27,8 @@ export interface IssueModel {
   additionalImageUrls?: string[];
   // A hyperlink reference to an issue type (the ID alone is also a valid reference)
   issueTypeHref: string;
+  // The issue type
+  issueType: IssueTypeModel;
   // A GeoJSON point indicating the geographical coordinates of the issue
   location: GeoJson;
   // The current state of the issue (new, inProgress, rejected or resolved)

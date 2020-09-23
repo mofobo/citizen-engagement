@@ -10,3 +10,12 @@ body {
 }
 
 @import '~leaflet/dist/leaflet.css';
+
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 20px);
+  padding: 12px;
+}

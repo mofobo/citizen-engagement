@@ -19,36 +19,42 @@ import {CreateIssueComponent} from './create-issue/create-issue.component';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MapComponent} from './map/map.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatSelectModule} from "@angular/material/select";
+import {MatSelectModule} from '@angular/material/select';
+import {IssueDetailsComponent} from './issue-details/issue-details.component';
+import { IssuesMapComponent } from './issues-map/issues-map.component';
+import {RouterModule} from "@angular/router";
 
 @NgModule({
-    imports: [
-        CommonModule,
-        CoreModule,
-        DataModule,
-        BrowserModule,
-        FormsModule,
-        CdkTableModule,
-        MatTableModule,
-        MatCardModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatButtonModule,
-        MatProgressSpinnerModule,
-        MatPaginatorModule,
-        MatSortModule,
-        MatTableModule,
-        MatStepperModule,
-        ReactiveFormsModule,
-        BrowserModule,
-        BrowserAnimationsModule,
-        MatSelectModule,
-    ],
+  imports: [
+    CommonModule,
+    CoreModule,
+    DataModule,
+    BrowserModule,
+    FormsModule,
+    CdkTableModule,
+    MatTableModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatProgressSpinnerModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatTableModule,
+    MatStepperModule,
+    ReactiveFormsModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    MatSelectModule,
+    RouterModule,
+  ],
   declarations: [
     IssueListComponent,
     LoginComponent,
     CreateIssueComponent,
     MapComponent,
+    IssueDetailsComponent,
+    IssuesMapComponent,
   ],
   exports: [
     IssueListComponent,

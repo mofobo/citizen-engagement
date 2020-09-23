@@ -1,4 +1,4 @@
-.create-issue-map-wrapper {
+.map-wrapper {
   position: relative;
   top: 0;
   left: 0;
@@ -7,22 +7,14 @@
   margin: 20px;
 }
 
-.create-issue-map-border {
+.map-border {
   border: 2px solid orange;
   height: 650px;
-  width: 100%;
+  width: 50%;
   float: left;
 }
 
-#create-issue-map {
+#map {
   height: 100%;
   width: 100%;
-}
-
-h1 {
-  margin: 20px;
-}
-
-mat-form-field {
-  margin: 20px;
 }
