@@ -21,9 +21,6 @@ export class IssueWebRepository extends IssueRepository {
 
   getIssues(getIssuesRequestModel: GetIssuesRequestModel): Observable<GetIssuesResponseModel> {
     const url = `${environment.apiUrl}/issues`;
-
-    console.log('getIssuesRequestModel', getIssuesRequestModel);
-
     let httpParams = new HttpParams()
       .set('page', getIssuesRequestModel.page.toString())
       .set('pageSize', getIssuesRequestModel.pageSize.toString())
@@ -52,9 +49,20 @@ export class IssueWebRepository extends IssueRepository {
   }
 
   getIssue(id: string): Observable<IssueModel> {
+    let httpParams = new HttpParams();
+    httpParams = httpParams.append('include', 'actions');
+    httpParams = httpParams.append('include', 'assignee');
+    httpParams = httpParams.append('include', 'creator');
+    httpParams = httpParams.append('include', 'issueType');
+
     const url = `${environment.apiUrl}/issues/${id}`;
-    return this.http
-      .get<IssueModel>(url);
+
+    return this.http.get<IssueModel>(url, {params: httpParams});
+  }
+
+  deleteIssue(id: string): Observable<void> {
+    const url = `${environment.apiUrl}/issues/${id}`;
+    return this.http.delete<void>(url);
   }
 
   createIssue(createIssueRequest: CreateIssueRequestModel): Observable<IssueModel> {

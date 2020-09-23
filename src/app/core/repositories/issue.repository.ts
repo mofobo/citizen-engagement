@@ -9,5 +9,7 @@ export abstract class IssueRepository {
 
   abstract getIssue(id: string): Observable<IssueModel>;
 
+  abstract deleteIssue(id: string): Observable<void>;
+
   abstract createIssue(createIssueRequest: CreateIssueRequestModel): Observable<IssueModel>;
 }

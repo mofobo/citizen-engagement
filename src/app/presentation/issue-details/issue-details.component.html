@@ -1,0 +1,28 @@
+<div class="spinner-container" *ngIf="loading$ | async" style="margin:0 auto;">
+  <mat-spinner></mat-spinner>
+</div>
+
+<div class="map-wrapper">
+  <div class="map-border">
+    <div id="map"></div>
+  </div>
+</div>
+
+<div *ngIf="issue">
+  Description: {{issue.description}}
+  <br>
+  Creator: {{issue.creator.name}}
+  <br>
+  CreatedAt: {{issue.createdAt}}
+  <br>
+  UpdatedAt: {{issue.updatedAt}}
+  <br>
+  State: {{issue.state}}
+  <br>
+  Type: {{issue.issueType.name}}
+</div>
+
+<div>
+  <a mat-button (click)="onDeleteClicked()"> Delete </a>
+  <a mat-button (click)="modifyClicked()"> Modify </a>
+</div>

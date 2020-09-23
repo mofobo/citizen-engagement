@@ -82,7 +82,7 @@ export class CreateIssueComponent implements OnInit, AfterViewInit {
   }
 
   createMap() {
-    this.map = L.map('map').fitWorld();
+    this.map = L.map('create-issue-map').fitWorld();
     const mainLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       minZoom: 1,
       maxZoom: this.maxZoom,
