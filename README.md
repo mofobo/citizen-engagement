@@ -28,9 +28,13 @@ Some tools that I used for the development of the application:
 * [dillinger] - dillinger is an online Markdown editor
 * [trello] - trello is a web-based Kanban-style list-making application
 ## Installation
+* Clone the git repository to your local machine
+* in your terminal: npm install 
+* in your terminal: ng serve
+* enjoy ! 
 ## Miscellaneous
 * [Citizen Engagement API documentation]
-* username: 'mohammed', password: '1234' (without quote)
+* username: 'admin', password: 'test' (without quote)
 ## Todos
 License
 ----

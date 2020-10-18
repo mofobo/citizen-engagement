@@ -91,8 +91,8 @@ export class IssuesMapComponent implements OnInit {
 
   }
 
-  navigateToDetails(id: string) {
-    this.router.navigate(['issues', id]);
+  navigateToIssueDetails(id: string) {
+    this.router.navigate(['issue-details', id]);
   }
 
   private addMarker(issue: IssueModel) {
@@ -105,7 +105,7 @@ export class IssuesMapComponent implements OnInit {
       popUp.getElement()
         .querySelector('.details')
         .addEventListener('click', e => {
-          this.navigateToDetails(issue.id);
+          this.navigateToIssueDetails(issue.id);
         });
     });
     marker.addTo(this.map);

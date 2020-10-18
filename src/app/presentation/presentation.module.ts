@@ -17,12 +17,12 @@ import {MatSortModule} from '@angular/material/sort';
 import {BrowserModule} from '@angular/platform-browser';
 import {CreateIssueComponent} from './create-issue/create-issue.component';
 import {MatStepperModule} from '@angular/material/stepper';
-import {MapComponent} from './map/map.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatSelectModule} from '@angular/material/select';
 import {IssueDetailsComponent} from './issue-details/issue-details.component';
 import { IssuesMapComponent } from './issues-map/issues-map.component';
-import {RouterModule} from "@angular/router";
+import {RouterModule} from '@angular/router';
+import { ModifyIssueComponent } from './modify-issue/modify-issue.component';
 
 @NgModule({
   imports: [
@@ -52,9 +52,9 @@ import {RouterModule} from "@angular/router";
     IssueListComponent,
     LoginComponent,
     CreateIssueComponent,
-    MapComponent,
     IssueDetailsComponent,
     IssuesMapComponent,
+    ModifyIssueComponent,
   ],
   exports: [
     IssueListComponent,

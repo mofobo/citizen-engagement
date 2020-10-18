@@ -75,6 +75,6 @@ export class IssueListComponent implements OnInit, AfterViewInit {
   }
 
   onRowClicked(id: string) {
-    this.router.navigate(['issues', id]);
+    this.router.navigate(['issue-details', id]);
   }
 }
