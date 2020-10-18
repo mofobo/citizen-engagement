@@ -57,16 +57,6 @@ export class IssueDetailsComponent implements OnInit, AfterViewInit {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     });
     mainLayer.addTo(this.map);
-
-    this.map.on('click', e => {
-      console.log(e.latlng); // get the coordinates
-      this.replaceMarker(e.latlng.lat, e.latlng.lng);
-
-      // this.firstFormGroup.get('latitudeCtrl').setValue(e.latlng.lat);
-      // this.firstFormGroup.get('longitudeCtrl').setValue(e.latlng.lng);
-
-      this.flyToLocation(e.latlng.lat, e.latlng.lng);
-    });
   }
 
   flyToLocation(latitude: number, longitude: number) {
@@ -85,9 +75,8 @@ export class IssueDetailsComponent implements OnInit, AfterViewInit {
     }
   }
 
-
-  modifyClicked() {
-
+  onModifyClicked() {
+    this.router.navigate(['modify-issue', this.issue.id]);
   }
 
   private replaceMarker(latitude: number, longitude: number) {

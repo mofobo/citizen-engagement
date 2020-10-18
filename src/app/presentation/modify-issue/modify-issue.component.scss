@@ -1,4 +1,4 @@
-.issues-map-wrapper {
+.modify-map-wrapper {
   position: relative;
   top: 0;
   left: 0;
@@ -7,18 +7,17 @@
   margin: 20px;
 }
 
-.issues-map-border {
+.modify-map-border {
   border: 2px solid orange;
   height: 650px;
-  width: 100%;
+  width: 50%;
   float: left;
 }
 
-#issues-map {
+#modify-map {
   height: 100%;
   width: 100%;
 }
-
 
 h1 {
   margin: 20px;

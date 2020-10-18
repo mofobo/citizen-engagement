@@ -8,6 +8,7 @@ import {CreateIssueRequestModel} from '../../../core/domain/create-issue-request
 import {GetIssuesRequestModel} from '../../../core/domain/get-issues-request.model';
 import {map} from 'rxjs/operators';
 import {GetIssuesResponseModel} from '../../../core/domain/get-issues-response.model';
+import {ModifyIssueRequestModel} from '../../../core/domain/modify-issue-request.model';
 
 @Injectable({
   providedIn: 'root'
@@ -40,8 +41,10 @@ export class IssueWebRepository extends IssueRepository {
           const getIssuesResponseModel = {
             issues: response.body,
             paginationTotal: Number(response.headers.get('Pagination-Total')),
-            nextPage: Link['next'],
-            lastPage: Link['last']
+            // @ts-ignore
+            nextPage: Link.next,
+            // @ts-ignore
+            lastPage: Link.last
           } as GetIssuesResponseModel;
           return getIssuesResponseModel;
         }
@@ -69,6 +72,12 @@ export class IssueWebRepository extends IssueRepository {
     const url = `${environment.apiUrl}/issues`;
     return this.http
       .post<any>(url, createIssueRequest);
+  }
+
+  modifyIssue(modifyIssueRequest: ModifyIssueRequestModel): Observable<IssueModel> {
+    const url = `${environment.apiUrl}/issues/${modifyIssueRequest.id}`;
+    return this.http
+      .patch<any>(url, modifyIssueRequest);
   }
 
   private parseLinkHeader(header) {
